@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using WebAppCovidStat.Models;
@@ -55,8 +56,18 @@ namespace WebAppCovidStat.Controllers
         public ActionResult Create()
 
         {
-
+            // TODO: change to enum?
+            List<string> vacList = new List<string>
+            {
+                "Pfizer",
+                "AstraZeneca",
+                "CoronaVac",
+                "CoviShield"
+            };
+            ViewBag.Vaccines = new SelectList(vacList);
             return View();
+
+            // TODO: add validation
 
         }
 
