@@ -22,26 +22,23 @@
     <table class="table">
         <tr>
             <th>
-                @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+                @Html.ActionLink(Html.DisplayNameFor(model => model.FirstName).ToHtmlString(), "Index", new { sortOrder = ViewBag.NameSortParm })
             </th>            
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
+                @Html.ActionLink(Html.DisplayNameFor(model => model.LastName).ToHtmlString(), "Index", new { sortOrder = ViewBag.NameSortParm })
+            </th>            
             <th>
                 @Html.DisplayNameFor(model => model.Birthday)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
+                @Html.ActionLink(Html.DisplayNameFor(model => model.City).ToHtmlString(), "Index", new { sortOrder = ViewBag.NameSortParm })
+            </th>            
             <th>
                 @Html.DisplayNameFor(model => model.DayOfVaccination)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Vaccine)
-            </th>
+                @Html.ActionLink(Html.DisplayNameFor(model => model.Vaccine).ToHtmlString(), "Index", new { sortOrder = ViewBag.NameSortParm })
+            </th>         
             <th>
                 @Html.DisplayNameFor(model => model.VaccineDose)
             </th>
