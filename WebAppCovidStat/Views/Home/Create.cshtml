@@ -1,4 +1,5 @@
-﻿@model WebAppCovidStat.Models.VacPerson
+﻿@using WebAppCovidStat.Models
+@model VacPerson
 
 @{
     ViewBag.Title = "Create";
@@ -6,8 +7,8 @@
 
 <h2>Create</h2>
 
-<script src="/Scripts/MicrosoftAjax.js" type="text/javascript"></script>
-<script src="/Scripts/MicrosoftMvcValidation.js" type="text/javascript"></script>
+
+
 
 @{ Html.EnableClientValidation(); }
 @using (Html.BeginForm())
@@ -61,9 +62,8 @@
             @Html.LabelFor(model => model.Vaccine)
         </div>
         <div>
-            @Html.DropDownList("vaccine", ViewBag.Vaccines as SelectList)
+            @Html.DropDownListFor(model => model.Vaccine, new SelectList(Enum.GetValues(typeof(Vaccine))))
             @Html.ValidationMessageFor(model => model.Vaccine)
-
         </div>
 
         <div class="editor-label">
@@ -79,4 +79,9 @@
         </p>
     </fieldset>
 
+}
+
+@section Scripts {
+    <script src="~/Scripts/MicrosoftAjax.js" type="text/javascript"></script>
+    <script src="~/Scripts/MicrosoftMvcValidation.js" type="text/javascript"></script>
 }

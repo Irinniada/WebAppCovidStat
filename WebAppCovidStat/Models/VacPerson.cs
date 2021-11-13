@@ -40,10 +40,18 @@ namespace WebAppCovidStat.Models
         public System.DateTime DayOfVaccination { get; set; }
 
         [Required(ErrorMessage = "Vaccine name is required")]
-        public string Vaccine { get; set; }
+        public Vaccine Vaccine { get; set; }
 
         [Display(Name = "Vaccine Dose")]
         [Required(ErrorMessage = "Vaccine dose n. is required")]
         public int VaccineDose { get; set; }
+    }
+
+    public enum Vaccine
+    {
+        Pfizer,
+        AstraZeneca,
+                CoronaVac,
+                CoviShield            
     }
 }

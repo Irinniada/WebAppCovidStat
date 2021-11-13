@@ -55,16 +55,8 @@ namespace WebAppCovidStat.Controllers
 
         public ActionResult Create()
 
-        {
-            // TODO: change to enum?
-            List<string> vacList = new List<string>
-            {
-                "Pfizer",
-                "AstraZeneca",
-                "CoronaVac",
-                "CoviShield"
-            };
-            ViewBag.Vaccines = new SelectList(vacList);
+        {           
+            
             return View();
 
             // TODO: add validation
