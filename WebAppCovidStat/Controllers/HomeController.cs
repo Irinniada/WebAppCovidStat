@@ -9,9 +9,33 @@ namespace WebAppCovidStat.Controllers
     {
         private VacDBEntities _db = new VacDBEntities();
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            return View(_db.Vacced.ToList());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var vaced = from s in _db.Vacced
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                vaced = vaced.Where(s => s.LastName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    vaced = vaced.OrderByDescending(s => s.LastName);
+                    break;
+                case "Date":
+                    vaced = vaced.OrderBy(s => s.Birthday);
+                    break;
+                case "date_desc":
+                    vaced = vaced.OrderByDescending(s => s.DayOfVaccination);
+                    break;
+                default:
+                    vaced = vaced.OrderBy(s => s.LastName);
+                    break;
+            }
+
+            return View(vaced.ToList());
         }
 
         // GET: /Home/Details/5 
@@ -43,7 +67,6 @@ namespace WebAppCovidStat.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
 
         public ActionResult Create([Bind(Exclude = "Id")] VacPerson personToAdd)
-
         {            
                 if (ModelState.IsValid)
                 {
@@ -53,17 +76,6 @@ namespace WebAppCovidStat.Controllers
                 }            
             
                 return View(personToAdd);
-            
-            /*if (!ModelState.IsValid)
-
-                return View();
-
-            _db.AddToVacPersonSet(movieToCreate);
-
-            _db.SaveChanges();
-
-            return RedirectToAction("Index");*/
-
         }
 
         //
