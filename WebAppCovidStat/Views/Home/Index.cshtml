@@ -9,6 +9,8 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("City Stats", "AboutCity")
+
 
     @using (Html.BeginForm())
     {
@@ -16,8 +18,8 @@
         Last Name: @Html.TextBox("SearchString") <br />
         <input type="submit" value="Filter" />
     </p>
-    }
-</p>
+}
+    </p>
 
     <table class="table">
         <tr>
@@ -78,3 +80,5 @@
         }
 
     </table>
+
+    

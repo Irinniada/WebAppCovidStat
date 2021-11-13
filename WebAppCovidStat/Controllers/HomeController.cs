@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using WebAppCovidStat.Models;
+using PagedList;
 
 namespace WebAppCovidStat.Controllers
 {
@@ -12,9 +13,14 @@ namespace WebAppCovidStat.Controllers
         // GET: Home
         public ActionResult Index(string sortOrder, string searchString)
         {
+            
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-            var vaced = from s in _db.Vacced
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";            
+
+            ViewBag.CurrentFilter = searchString;          
+
+            var vaced = from s in _db.Vacced 
                            select s;
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -35,7 +41,7 @@ namespace WebAppCovidStat.Controllers
                     vaced = vaced.OrderBy(s => s.LastName);
                     break;
             }
-
+            
             return View(vaced.ToList());
         }
 
@@ -55,12 +61,9 @@ namespace WebAppCovidStat.Controllers
 
         public ActionResult Create()
 
-        {           
+        {          
             
             return View();
-
-            // TODO: add validation
-
         }
 
         //
@@ -123,5 +126,24 @@ namespace WebAppCovidStat.Controllers
 
         }
 
+        public ActionResult AboutCity()
+        {
+            string query = "SELECT COUNT(City) FROM Vacced GROUP BY City";
+            //string query = "SELECT v.* FROM Vacced as v";
+            //string query = "select ID,FirstName,LastName,Birthday, COUNT(CITY) OVER (PARTITION BY CITY) from VACCED ";
+            using (var context = new VacDBEntities())
+            {
+                var blogs = context.Database.SqlQuery<int>(query).ToList();
+                return View(blogs);
+            }
+                     
+        }
+
+    }
+    public class CityCount
+    {
+        public int Count { get; set; }
+        public string City { get; set; }
     }
 }
+

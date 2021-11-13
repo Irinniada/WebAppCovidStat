@@ -12,6 +12,7 @@ namespace WebAppCovidStat.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class VacPerson
     {
@@ -31,6 +32,7 @@ namespace WebAppCovidStat.Models
         [Required(ErrorMessage = "Dates are required")]
         public System.DateTime Birthday { get; set; }
 
+        [Display(Name = "City")]
         public string City { get; set; }
 
         [Display(Name = "Day Of Vaccination")]
@@ -38,9 +40,10 @@ namespace WebAppCovidStat.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Dates are required")]
         public System.DateTime DayOfVaccination { get; set; }
-
+        
         [Required(ErrorMessage = "Vaccine name is required")]
-        public Vaccine Vaccine { get; set; }
+        //[Column(TypeName = "nvarchar(50)")]
+        public /*Vaccine*/string Vaccine { get; set; }
 
         [Display(Name = "Vaccine Dose")]
         [Required(ErrorMessage = "Vaccine dose n. is required")]
@@ -51,7 +54,7 @@ namespace WebAppCovidStat.Models
     {
         Pfizer,
         AstraZeneca,
-                CoronaVac,
-                CoviShield            
+        CoronaVac,
+        CoviShield            
     }
 }
