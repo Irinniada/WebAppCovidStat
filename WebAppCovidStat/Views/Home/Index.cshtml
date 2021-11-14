@@ -16,7 +16,7 @@
 
     @using (Html.BeginForm())
     {
-<p>
+    <p>
         Last Name: @Html.TextBox("SearchString") <br />
         <input type="submit" value="Filter" />
     </p>
@@ -83,4 +83,10 @@
 
     </table>
 
-    
+    <br />
+    @using (Html.BeginForm("Export", "Home", FormMethod.Post))
+    {
+        <input type="submit" id="btnSubmit" value="Export" />
+    }
+
+

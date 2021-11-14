@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web.Mvc;
 using WebAppCovidStat.Models;
 using PagedList;
+using System.Text;
+using System.Globalization;
 
 namespace WebAppCovidStat.Controllers
 {
@@ -144,7 +146,45 @@ namespace WebAppCovidStat.Controllers
             return View(vaced);
         }
 
+        [HttpPost]
+        public FileResult Export()
+        {
+            VacDBEntities entities = new VacDBEntities();
+            List<object> vacced = (from v in entities.Vacced.ToList()
+                                   select new[] {v.Id.ToString(),
+                                                v.FirstName.ToString(),
+                                                v.LastName.ToString(),
+                                                v.Birthday.ToString(),
+                                                v.City.ToString(),
+                                                v.DayOfVaccination.ToString(),
+                                                v.Vaccine,
+                                                v.VaccineDose.ToString()
+                                }).ToList<object>();
+
+            //Insert the Column Names.
+            vacced.Insert(0, new string[8] { "Person ID", "First Name", "Last Name", "Birthday", "City", "Day of Vaccination", "Vaccine", "Vaccine Dose" });
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < vacced.Count; i++)
+            {
+                string[] vacP = (string[])vacced[i];
+                for (int j = 0; j < vacP.Length; j++)
+                {
+                    //Append data with separator.
+                    sb.Append(vacP[j] + ';');
+                }
+
+                //Append new line character.
+                sb.Append("\r\n");
+
+            }
+
+
+            return File(Encoding.GetEncoding(1251).GetBytes(sb.ToString()), "text/csv", "Grid.csv");
+        }
     }
-   
+
+    
+
 }
 
