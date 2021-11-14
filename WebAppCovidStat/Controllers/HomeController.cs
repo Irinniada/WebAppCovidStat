@@ -127,23 +127,24 @@ namespace WebAppCovidStat.Controllers
         }
 
         public ActionResult AboutCity()
+        {             
+            var vaced = _db.Database.SqlQuery<StatInfo>("SELECT City AS Name, COUNT(*) AS Count FROM Vacced GROUP BY City ORDER BY Count DESC").ToList();            
+            return View(vaced);                                 
+        }
+
+        public ActionResult AboutVaccineTypes()
         {
-            string query = "SELECT COUNT(City) FROM Vacced GROUP BY City";
-            //string query = "SELECT v.* FROM Vacced as v";
-            //string query = "select ID,FirstName,LastName,Birthday, COUNT(CITY) OVER (PARTITION BY CITY) from VACCED ";
-            using (var context = new VacDBEntities())
-            {
-                var blogs = context.Database.SqlQuery<int>(query).ToList();
-                return View(blogs);
-            }
-                     
+            var vaced = _db.Database.SqlQuery<StatInfo>("SELECT Vaccine AS Name, COUNT(*) AS Count FROM Vacced GROUP BY Vaccine ORDER BY Count DESC").ToList();
+            return View(vaced);
+        }
+
+        public ActionResult AboutVaccineCount()
+        {
+            var vaced = _db.Database.SqlQuery<StatIntInfo>("SELECT VaccineDose AS Name, COUNT(*) AS Count FROM Vacced GROUP BY VaccineDose ORDER BY Count DESC").ToList();
+            return View(vaced);
         }
 
     }
-    public class CityCount
-    {
-        public int Count { get; set; }
-        public string City { get; set; }
-    }
+   
 }
 

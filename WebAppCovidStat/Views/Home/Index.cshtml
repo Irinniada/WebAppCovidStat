@@ -10,11 +10,13 @@
 <p>
     @Html.ActionLink("Create New", "Create")
     @Html.ActionLink("City Stats", "AboutCity")
+    @Html.ActionLink("Vaccine Type Stats", "AboutVaccineTypes")
+    @Html.ActionLink("Vaccine Count Stats", "AboutVaccineCount")
 
 
     @using (Html.BeginForm())
     {
-    <p>
+<p>
         Last Name: @Html.TextBox("SearchString") <br />
         <input type="submit" value="Filter" />
     </p>

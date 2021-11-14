@@ -49,7 +49,7 @@ namespace WebAppCovidStat.Models
         [Required(ErrorMessage = "Vaccine dose n. is required")]
         public int VaccineDose { get; set; }
     }
-
+   
     public enum Vaccine
     {
         Pfizer,

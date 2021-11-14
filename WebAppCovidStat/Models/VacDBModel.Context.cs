@@ -29,5 +29,9 @@ namespace WebAppCovidStat.Models
         }
     
         public virtual DbSet<VacPerson> Vacced { get; set; }
+
+        public System.Data.Entity.DbSet<WebAppCovidStat.Models.StatInfo> StatInfoes { get; set; }
+
+        //public virtual DbSet<WebAppCovidStat.Models.StatInfo> StatInfoes { get; set; }
     }   
 }

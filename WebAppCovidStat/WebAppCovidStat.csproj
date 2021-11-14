@@ -146,6 +146,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\StatInfo.cs" />
+    <Compile Include="Models\StatIntInfo.cs" />
     <Compile Include="Models\VacDBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -183,6 +185,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\AboutCity.cshtml" />
+    <Content Include="Views\Home\AboutVaccineTypes.cshtml" />
+    <Content Include="Views\Home\AboutVaccineCount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

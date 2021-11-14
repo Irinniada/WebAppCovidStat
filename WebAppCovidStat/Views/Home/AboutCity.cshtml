@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebAppCovidStat.Models.VacPerson>
+﻿@model IEnumerable<WebAppCovidStat.Models.StatInfo>
 
 @{
     ViewBag.Title = "AboutCity";
@@ -12,57 +12,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Birthday)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DayOfVaccination)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Vaccine)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VaccineDose)
-        </th>
+            @Html.DisplayNameFor(model => model.Count)
+        </th>        
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Birthday)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DayOfVaccination)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vaccine)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VaccineDose)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
+            @Html.DisplayFor(modelItem => item.Count)
+        </td>        
     </tr>
 }
 
