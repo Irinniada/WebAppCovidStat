@@ -17,8 +17,8 @@ namespace WebAppCovidStat.Controllers
         {
             
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";            
+            ViewBag.SortingName = String.IsNullOrEmpty(sortOrder) ? "Name_Description" : "";
+            ViewBag.SortingDate = sortOrder == "Date_Enroll" ? "Date_Description" : "Date_Enroll";
 
             ViewBag.CurrentFilter = searchString;          
 
@@ -30,13 +30,16 @@ namespace WebAppCovidStat.Controllers
             }
             switch (sortOrder)
             {
-                case "name_desc":
+                case "Name_Description":
                     vaced = vaced.OrderByDescending(s => s.LastName);
                     break;
-                case "Date":
-                    vaced = vaced.OrderBy(s => s.Birthday);
+                case "Date_Enroll":
+                    vaced = vaced.OrderBy(s => s.DayOfVaccination);
                     break;
-                case "date_desc":
+                case "Date":
+                    vaced = vaced.OrderBy(s => s.DayOfVaccination);
+                    break;
+                case "Date_Description":
                     vaced = vaced.OrderByDescending(s => s.DayOfVaccination);
                     break;
                 default:
