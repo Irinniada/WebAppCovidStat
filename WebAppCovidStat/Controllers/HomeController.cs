@@ -6,6 +6,7 @@ using WebAppCovidStat.Models;
 using PagedList;
 using System.Text;
 using System.Globalization;
+using Newtonsoft.Json;
 
 namespace WebAppCovidStat.Controllers
 {
@@ -133,19 +134,42 @@ namespace WebAppCovidStat.Controllers
 
         public ActionResult AboutCity()
         {             
-            var vaced = _db.Database.SqlQuery<StatInfo>("SELECT City AS Name, COUNT(*) AS Count FROM Vacced GROUP BY City ORDER BY Count DESC").ToList();            
+            var vaced = _db.Database.SqlQuery<StatInfo>("SELECT City AS Name, COUNT(*) AS Count FROM Vacced GROUP BY City ORDER BY Count DESC").ToList();
+            List<DataPoint> dataPoints = new List<DataPoint>();
+            foreach (var v in vaced)
+            {
+                dataPoints.Add(new DataPoint(v.Count, v.Name, v.Name));
+            }
+            
+            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
             return View(vaced);                                 
         }
 
         public ActionResult AboutVaccineTypes()
         {
             var vaced = _db.Database.SqlQuery<StatInfo>("SELECT Vaccine AS Name, COUNT(*) AS Count FROM Vacced GROUP BY Vaccine ORDER BY Count DESC").ToList();
+            List<DataPoint> dataPoints = new List<DataPoint>();
+            foreach (var v in vaced)
+            {
+                dataPoints.Add(new DataPoint(v.Count, v.Name, v.Name));
+            }
+
+            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
             return View(vaced);
         }
 
         public ActionResult AboutVaccineCount()
         {
             var vaced = _db.Database.SqlQuery<StatIntInfo>("SELECT VaccineDose AS Name, COUNT(*) AS Count FROM Vacced GROUP BY VaccineDose ORDER BY Count DESC").ToList();
+            
+            List<DataPoint> dataPoints = new List<DataPoint>();
+            foreach (var v in vaced)
+            {
+                dataPoints.Add(new DataPoint(v.Count, v.Name.ToString(), v.Name.ToString()));
+            }
+
+            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+
             return View(vaced);
         }
 

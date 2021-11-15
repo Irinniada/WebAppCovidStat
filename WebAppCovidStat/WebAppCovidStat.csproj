@@ -159,6 +159,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataPoint.cs" />
     <Compile Include="Models\StatInfo.cs" />
     <Compile Include="Models\StatIntInfo.cs" />
     <Compile Include="Models\VacDBModel.Context.cs">
